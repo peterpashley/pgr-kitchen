@@ -23,7 +23,7 @@ public class SunMover : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		if( !updateInEditor )
+		if( !updateInEditor && !Application.isPlaying )
 		{
 			return;
 		}
