@@ -1166,7 +1166,8 @@ public class LevelBuilderFunctions
 			// pash: I think this is to ensure that the object gets culled in the later 'remove whitebox' step.
 			if (candidateMesh.gameObject.layer!=LayerMask.NameToLayer("MoveBlocker"))
 			{
-				candidateMesh.gameObject.layer=LayerMask.NameToLayer("WhiteBox");
+				Debug.LogError( "TODO mark objects for deletion without changing their layer" );
+				//candidateMesh.gameObject.layer=LayerMask.NameToLayer("WhiteBox");
 			}
 			//MeshRenderer renderer=candidateMesh.gameObject.GetComponent<MeshRenderer>();
 			//DestroyImmediate(candidateMesh);				
