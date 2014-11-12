@@ -1,8 +1,12 @@
 ﻿using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using System.Collections;
 
+#if UNITY_EDITOR
 [ExecuteInEditMode]
+#endif
 public class SunMover : MonoBehaviour 
 {
 	public bool updateInEditor;
@@ -14,10 +18,12 @@ public class SunMover : MonoBehaviour
 	public Color nightSkyColor;
 	public Color daySkyColor;
 
+	Camera[] _cameras;
+
 	// Use this for initialization
 	void Start () 
 	{
-	
+		_cameras = GameObject.FindObjectsOfType<Camera>();	
 	}
 	
 	// Update is called once per frame
@@ -50,7 +56,10 @@ public class SunMover : MonoBehaviour
 		//rotAxis = Quaternion.AngleAxis( 360.0f*dayOfYear, Vector3.up ) * rotAxis;
 
 		float crossOver = 0.1f;
-		Camera.main.backgroundColor = Color.Lerp( daySkyColor, nightSkyColor, dir.y / crossOver );
+		foreach( Camera cam in _cameras )
+		{
+			cam.backgroundColor = Color.Lerp( daySkyColor, nightSkyColor, dir.y / crossOver );
+		}
 		if( dir.y > 0.0f )
 		{
 			this.GetComponent<Light>().intensity = 0.0f;

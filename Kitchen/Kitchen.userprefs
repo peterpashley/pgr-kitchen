@@ -1,8 +1,16 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\SunMover.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\LevelBuilderFunctions.cs">
     <Files>
-      <File FileName="Assets\SunMover.cs" Line="26" Column="48" />
+      <File FileName="Assets\OVR\Scripts\OVRGamepadController.cs" Line="130" Column="2" />
+      <File FileName="Assets\OptionSelector.cs" Line="1" Column="1" />
+      <File FileName="Assets\Editor\OptionSelectorEditor.cs" Line="1" Column="1" />
+      <File FileName="Assets\SunMover.cs" Line="1" Column="1" />
+      <File FileName="Assets\VRPlayerController.cs" Line="36" Column="3" />
+      <File FileName="Assets\OVR\Scripts\OVRCameraController.cs" Line="1" Column="1" />
+      <File FileName="Assets\LevelBuilderFunctions.cs" Line="1776" Column="1" />
+      <File FileName="Assets\LightMapOffset.cs" Line="15" Column="4" />
+      <File FileName="Assets\MeshCombineTag.cs" Line="55" Column="11" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

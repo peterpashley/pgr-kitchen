@@ -7,6 +7,7 @@ public class OptionSelector : MonoBehaviour
 {
 	public KeyCode cycleOptionKey;
 	public TextMesh optionText;
+	public bool cycleOnClick;
 
 	[Range(0,20)]
 	public int option;
@@ -20,7 +21,7 @@ public class OptionSelector : MonoBehaviour
 		SetOption( option );
 	}
 
-	void SetOption( int value )
+	public void SetOption( int value )
 	{
 		option = value;
 

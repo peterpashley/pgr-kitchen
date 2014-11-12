@@ -10,6 +10,7 @@ public class OptionSelectorEditor : Editor
 		OptionSelector selector = target as OptionSelector;
 
 		selector.cycleOptionKey = (KeyCode)EditorGUILayout.EnumPopup( "Cycle Key", selector.cycleOptionKey );
+		selector.cycleOnClick = EditorGUILayout.Toggle( "Cycle On Click", selector.cycleOnClick );
 
 		selector.optionText = (TextMesh)EditorGUILayout.ObjectField( selector.optionText, typeof(TextMesh), true );
 
