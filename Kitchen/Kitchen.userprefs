@@ -8,9 +8,9 @@
       <File FileName="Assets\SunMover.cs" Line="1" Column="1" />
       <File FileName="Assets\VRPlayerController.cs" Line="36" Column="3" />
       <File FileName="Assets\OVR\Scripts\OVRCameraController.cs" Line="1" Column="1" />
-      <File FileName="Assets\LevelBuilderFunctions.cs" Line="1776" Column="1" />
+      <File FileName="Assets\LevelBuilderFunctions.cs" Line="1170" Column="7" />
       <File FileName="Assets\LightMapOffset.cs" Line="15" Column="4" />
-      <File FileName="Assets\MeshCombineTag.cs" Line="55" Column="11" />
+      <File FileName="Assets\MeshCombineTag.cs" Line="29" Column="27" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
