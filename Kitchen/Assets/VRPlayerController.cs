@@ -17,6 +17,9 @@ public class VRPlayerController : MonoBehaviour
 	float _moveTimer;
 	CharacterController charController;
 
+	float _standHeight;
+	float _sitHeight;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -29,6 +32,9 @@ public class VRPlayerController : MonoBehaviour
 		}
 
 		charController = this.GetComponent<CharacterController>();
+
+		_standHeight = charController.height;
+		_sitHeight = _standHeight - 0.9f;
 	}
 	
 	// Update is called once per frame
@@ -62,5 +68,19 @@ public class VRPlayerController : MonoBehaviour
 		{
 			_moveTimer = 0.0f;
 		}
+
+		if( Input.GetKeyDown(KeyCode.Q) )
+		{
+			_sitting = !_sitting;
+
+			float oldHeight = charController.height;
+			charController.height = _sitting ? _sitHeight : _standHeight;
+			if( !_sitting )
+			{
+				this.transform.position = this.transform.position + 0.5f*(charController.height - oldHeight)*Vector3.up;
+			}
+		}
 	}
+
+	bool _sitting;
 }
