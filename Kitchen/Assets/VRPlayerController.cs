@@ -36,14 +36,31 @@ public class VRPlayerController : MonoBehaviour
 		_standHeight = charController.height;
 		_sitHeight = _standHeight - 0.9f;
 	}
+
+	Vector3 mouseStartPos;
 	
 	// Update is called once per frame
 	void Update ()
 	{
+		bool doSit = false;
 		if( Input.GetMouseButtonUp(0) && _moveTimer < 0.5f )
 		{
-			selector.SetOption( (selector.option+1)%selector.options.Count );
+			if( (Input.mousePosition - mouseStartPos).magnitude > 50f ) 
+			{
+				doSit = true;
+			}
+
+			if( !doSit )
+			{
+				selector.SetOption( (selector.option+1)%selector.options.Count );
+			}
 		}
+
+		if( Input.GetMouseButtonDown(0) )
+		{
+			mouseStartPos = Input.mousePosition;
+		}
+
 
 		if( Input.GetMouseButton(0) )
 		{
@@ -69,7 +86,9 @@ public class VRPlayerController : MonoBehaviour
 			_moveTimer = 0.0f;
 		}
 
-		if( Input.GetKeyDown(KeyCode.Q) )
+
+
+		if( doSit || Input.GetKeyDown(KeyCode.Q) )
 		{
 			_sitting = !_sitting;
 
