@@ -1,9 +1,9 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\VRPlayerController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="..\..\..\..\..\Stuff\Dev\oculus_prototypes\MonumentRift\Assets\Scripts\MagRotator.cs">
     <Files>
-      <File FileName="Assets\VRPlayerController.cs" Line="55" Column="70" />
-      <File FileName="Assets\OptionSelector.cs" Line="1" Column="1" />
+      <File FileName="..\..\..\..\..\Stuff\Dev\oculus_prototypes\MonumentRift\Assets\Scripts\MagDragger.cs" Line="326" Column="1" />
+      <File FileName="..\..\..\..\..\Stuff\Dev\oculus_prototypes\MonumentRift\Assets\Scripts\MagRotator.cs" Line="24" Column="31" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
