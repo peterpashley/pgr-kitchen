@@ -10,7 +10,6 @@ public class VRPlayerController : MonoBehaviour
 	}
 	public Mode mode;
 	public Camera normalCamera;
-	public OVRCameraController vrController;
 	public float speed;
 	public OptionSelector selector;
 
@@ -24,7 +23,7 @@ public class VRPlayerController : MonoBehaviour
 	void Start () 
 	{
 		normalCamera.enabled = mode == Mode.Normal;
-		vrController.gameObject.SetActive( mode == Mode.VR );
+		//vrController.gameObject.SetActive( mode == Mode.VR );
 
 		foreach( MouseLook ml in GameObject.FindObjectsOfType<MouseLook>() )
 		{
@@ -75,7 +74,7 @@ public class VRPlayerController : MonoBehaviour
 				}
 				else
 				{
-					vrController.GetCameraForward( ref fwd );
+					//vrController.GetCameraForward( ref fwd );
 				}
 				
 				charController.Move( fwd * speed * Time.deltaTime );

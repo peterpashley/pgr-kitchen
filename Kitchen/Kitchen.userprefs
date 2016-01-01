@@ -1,9 +1,15 @@
-﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="..\..\..\..\..\Stuff\Dev\oculus_prototypes\MonumentRift\Assets\Scripts\MagRotator.cs">
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\LayoutCuboid.cs">
     <Files>
-      <File FileName="..\..\..\..\..\Stuff\Dev\oculus_prototypes\MonumentRift\Assets\Scripts\MagDragger.cs" Line="326" Column="1" />
-      <File FileName="..\..\..\..\..\Stuff\Dev\oculus_prototypes\MonumentRift\Assets\Scripts\MagRotator.cs" Line="24" Column="31" />
+      <File FileName="Assets\VRPlayerController.cs" Line="77" Column="8" />
+      <File FileName="Assets\Plugins\SimpleJSON.cs" Line="1" Column="1" />
+      <File FileName="..\..\..\..\..\Stuff\Dev\oculus_prototypes\MonumentRift\Assets\Scripts\Mover.cs" Line="1" Column="1" />
+      <File FileName="..\..\..\..\..\Stuff\Dev\oculus_prototypes\MonumentRift\Assets\Scripts\LookDragger.cs" Line="1" Column="1" />
+      <File FileName="Assets\Editor\LevelBuilderWindow.cs" Line="8" Column="2" />
+      <File FileName="Assets\MeshCombineTag.cs" Line="27" Column="5" />
+      <File FileName="Assets\LevelBuilderFunctions.cs" Line="410" Column="7" />
+      <File FileName="Assets\LayoutCuboid.cs" Line="51" Column="66" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -864,9 +864,9 @@ public class LevelBuilderFunctions
 								{
 									newUV0s[subIndex] = meshfilter.sharedMesh.uv[index];
 								}
-								if (meshfilter.sharedMesh.uv1.Length>0)
+								if (meshfilter.sharedMesh.uv2.Length>0)
 								{
-									newUV1s[subIndex] = meshfilter.sharedMesh.uv1[index];
+									newUV1s[subIndex] = meshfilter.sharedMesh.uv2[index];
 								}
 								if (meshfilter.sharedMesh.uv2.Length>0)
 								{
@@ -881,9 +881,9 @@ public class LevelBuilderFunctions
 							{
 								newMesh.uv = newUV0s;
 							}
-							if (meshfilter.sharedMesh.uv1.Length>0)
+							if (meshfilter.sharedMesh.uv2.Length>0)
 							{
-								newMesh.uv1 = newUV1s;
+								newMesh.uv2 = newUV1s;
 							}
 							if (meshfilter.sharedMesh.uv2.Length>0)
 							{
@@ -1471,7 +1471,7 @@ public class LevelBuilderFunctions
 				}
 				
 				Vector2[] uvs1=childMeshFilter.sharedMesh.uv;
-				Vector2[] uvs2=childMeshFilter.sharedMesh.uv1;
+				Vector2[] uvs2=childMeshFilter.sharedMesh.uv2;
 				Vector2[] uvs3=childMeshFilter.sharedMesh.uv2;
 				if (uvs2.Length<uvs1.Length)
 				{
@@ -1572,7 +1572,7 @@ public class LevelBuilderFunctions
 	
 	static float GetMeshUVScale (MeshFilter meshFilter )
 	{
-		SerializedObject so = new SerializedObject (meshFilter.gameObject.renderer);
+		SerializedObject so = new SerializedObject (meshFilter.gameObject.GetComponent<Renderer>());
 		float scale = so.FindProperty("m_ScaleInLightmap").floatValue;
 		
 		if( scale > 1 )
@@ -1828,7 +1828,7 @@ public class LevelBuilderFunctions
 				//check that the bounding box is not entirely underwater
 				//Debug.Log("Bounds max"+generatedMeshesInLastBatch[i].name+" = "+generatedMeshesInLastBatch[i].renderer.bounds.max);
 				//Debug.Log("Bounds min"+generatedMeshesInLastBatch[i].name+" = "+generatedMeshesInLastBatch[i].renderer.bounds.min);
-				if (generatedMeshesInLastBatch[i].renderer.bounds.max.y<0.05f)
+				if (generatedMeshesInLastBatch[i].GetComponent<Renderer>().bounds.max.y<0.05f)
 				{
 					Debug.Log("removing unwanted reflection: "+ generatedMeshesInLastBatch[i].name);
 					GameObject.DestroyImmediate(generatedMeshesInLastBatch[i].gameObject);

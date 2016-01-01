@@ -20,10 +20,14 @@ public class SunMover : MonoBehaviour
 
 	Camera[] _cameras;
 
+	Color _dayAmbientColour;
+
 	// Use this for initialization
 	void Start () 
 	{
 		_cameras = GameObject.FindObjectsOfType<Camera>();	
+
+		_dayAmbientColour = RenderSettings.ambientLight;
 	}
 	
 	// Update is called once per frame
@@ -68,5 +72,7 @@ public class SunMover : MonoBehaviour
 		{
 			this.GetComponent<Light>().intensity = 1.0f;
 		}
+
+		RenderSettings.ambientLight = Color.Lerp (_dayAmbientColour, nightSkyColor, Mathf.Clamp01(5f*dir.y) );
 	}
 }
