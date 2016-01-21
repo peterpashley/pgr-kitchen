@@ -37,6 +37,9 @@ public class LayoutCuboid : MonoBehaviour
 	public WatchedVector3 edgeMin;
 	public WatchedVector3 edgeMax;
 	public Vector3 size;
+	public int edgeLineSize = 1;
+	[Range(0,1)]
+	public float edgeLineStrength = 1;
 
 	Vector3 _lastPosition;
 	Quaternion _lastRotation;

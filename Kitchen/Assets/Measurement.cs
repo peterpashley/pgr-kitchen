@@ -6,6 +6,12 @@ using System.Collections;
 
 public class Measurement : MonoBehaviour 
 {
+	public enum MeasureMode
+	{
+		To,
+		Between,
+	}
+	public MeasureMode mode = MeasureMode.Between;
 	public Color color = Color.black;
 	public float distance;
 
@@ -22,16 +28,27 @@ public class Measurement : MonoBehaviour
 			Gizmos.DrawLine( this.transform.position, hitInfo.point );
 			Gizmos.DrawRay( hitInfo.point, 0.05f*(-this.transform.up-this.transform.forward) );
 
-			if( Physics.Raycast( this.transform.position, -this.transform.forward, out hitInfo ) )
+			if( mode == MeasureMode.Between )
 			{
-				Gizmos.DrawLine( this.transform.position, hitInfo.point );
-				Gizmos.DrawRay( hitInfo.point, 0.05f*(-this.transform.up+this.transform.forward) );
+				if( Physics.Raycast( this.transform.position, -this.transform.forward, out hitInfo ) )
+				{
+					Gizmos.DrawLine( this.transform.position, hitInfo.point );
+					Gizmos.DrawRay( hitInfo.point, 0.05f*(-this.transform.up+this.transform.forward) );
 
-				distance += hitInfo.distance;
+					distance += hitInfo.distance;
+
+					distance = Mathf.Round( 1000f*distance );
+
+					EditorText.DrawText( transform.position - 0.01f*transform.up, "" + (distance) + "mm", color );
+				}
+			}
+			else
+			{
+				Gizmos.DrawRay( transform.position, 0.05f*(-this.transform.up+this.transform.forward) );
 
 				distance = Mathf.Round( 1000f*distance );
 
-				EditorText.DrawText( transform.position - 0.01f*transform.up, "" + (distance) + "mm", color );
+				EditorText.DrawText( 0.5f*(transform.position+hitInfo.point) - 0.01f*transform.up, "" + (distance) + "mm", color );
 			}
 		}
 		
