@@ -33,14 +33,34 @@ public class DrawingView : MonoBehaviour
 				GameObject.DestroyImmediate( child.gameObject );
 			}
 
+			Quaternion baseRotation = linePrefab.transform.rotation;
+
+			Vector3[] offsetMultipliers = new Vector3[4];
+			offsetMultipliers[0] = new Vector3(1,0,0);
+			offsetMultipliers[1] = new Vector3(0,1,0);
+			offsetMultipliers[2] = new Vector3(-1,0,0);
+			offsetMultipliers[3] = new Vector3(0,-1,0);
+
 			var cubes = GameObject.FindObjectsOfType<LayoutCuboid>();
 			foreach( var cube in cubes )
 			{
 				float lineWidth = pixelSize * (float)cube.edgeLineSize;
+
+				Vector3 eyeSize = cam.transform.InverseTransformDirection( cube.transform.TransformDirection( cube.transform.localScale ) ); 
+				eyeSize.x = Mathf.Abs( eyeSize.x );
+				eyeSize.y = Mathf.Abs( eyeSize.y );
+				eyeSize.z = Mathf.Abs( eyeSize.z );
+				Vector3 eyePos = cam.transform.InverseTransformPoint( cube.transform.position );
+
+				if( Mathf.Abs(eyePos.x)-0.5f*eyeSize.x > cam.orthographicSize || Mathf.Abs(eyePos.y)-0.5f*eyeSize.y > cam.orthographicSize )
+				{
+					continue;
+				}
+
 				for( int i=0 ; i<4 ; i++ )
 				{
 					var renderer = GameObject.Instantiate(linePrefab);
-					Vector3 offset = cube.size;
+					Vector3 offset = Vector3.zero;
 					if( cube.edgeLineStrength < 0.75f )
 					{
 						renderer.sharedMaterial = greyLine;
@@ -50,33 +70,13 @@ public class DrawingView : MonoBehaviour
 						renderer.sharedMaterial = blackLine;
 					}
 
-					offset.y = 0f;
+					offset.x = offsetMultipliers[i].x * eyeSize.x;
+					offset.y = offsetMultipliers[i].y * eyeSize.y;
+					offset.z = offsetMultipliers[i].z * eyeSize.z;
 
-					switch( i )
-					{
-					case 0:
-					case 2:
-						offset.z = 0f;
-						break;
-					case 1:
-					case 3:
-						offset.x = 0f;
-						break;
-					}
-					switch( i )
-					{
-					case 0:
-					case 1:
-						offset *= 1f;
-						break;
-					case 2:
-					case 3:
-						offset *= -1f;
-						break;
-					}
 					offset *= 0.5f;
 					float angle = 90f * i;
-					Vector3 pos = cube.transform.position + offset;
+					Vector3 pos = cam.transform.TransformPoint(eyePos + offset);
 
 					// Align to pixels:
 					Vector3 posScreen = cam.WorldToScreenPoint( pos );
@@ -86,11 +86,11 @@ public class DrawingView : MonoBehaviour
 					//pos.x = lineWidth*Mathf.Round(pos.x/lineWidth+0.5f);
 					//pos.z = lineWidth*Mathf.Round(pos.z/lineWidth+0.5f);
 					renderer.transform.position = pos;
-					renderer.transform.rotation = Quaternion.AngleAxis( angle, Vector3.up );
+					renderer.transform.rotation = cam.transform.rotation * Quaternion.AngleAxis( angle, Vector3.forward );
 					renderer.transform.parent = this.transform;
 					Vector3 scale = renderer.transform.localScale;
 					scale.x = lineWidth;
-					scale.z = 2f*Mathf.Max(0.5f*cube.size.x - Mathf.Abs(offset.x), 0.5f*cube.size.z - Mathf.Abs(offset.z) );
+					scale.y = 2f*Mathf.Max(0.5f*eyeSize.x - Mathf.Abs(offset.x), 0.5f*eyeSize.y - Mathf.Abs(offset.y) );
 					renderer.transform.localScale = scale;
 				}
 			}
