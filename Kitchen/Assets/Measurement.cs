@@ -10,6 +10,7 @@ public class Measurement : MonoBehaviour
 	{
 		To,
 		Between,
+		Fixed,
 	}
 	public MeasureMode mode = MeasureMode.Between;
 	public Color color = Color.black;
@@ -17,41 +18,51 @@ public class Measurement : MonoBehaviour
 
 	void OnDrawGizmos()
 	{
-		RaycastHit hitInfo;
-
 		Gizmos.color = color;
 		Gizmos.DrawCube( transform.position, 0.01f*Vector3.one);
 
-		if( Physics.Raycast( this.transform.position, this.transform.forward, out hitInfo ) )
+		if( mode == MeasureMode.Fixed )
 		{
-			distance = hitInfo.distance;
-			Gizmos.DrawLine( this.transform.position, hitInfo.point );
-			Gizmos.DrawRay( hitInfo.point, 0.05f*(-this.transform.up-this.transform.forward) );
+			Vector3 farPoint = this.transform.position + 0.001f*distance * this.transform.forward;
+			Gizmos.DrawLine( this.transform.position, farPoint );
+			Gizmos.DrawRay( farPoint, 0.05f*(-this.transform.up-this.transform.forward) );
+			Gizmos.DrawRay( transform.position, 0.05f*(-this.transform.up+this.transform.forward) );
 
-			if( mode == MeasureMode.Between )
+			EditorText.DrawText( 0.5f*(transform.position+farPoint) - 0.01f*transform.up, "" + (distance) + "mm", color );
+		}
+		else
+		{
+			RaycastHit hitInfo;
+			if( Physics.Raycast( this.transform.position, this.transform.forward, out hitInfo ) )
 			{
-				if( Physics.Raycast( this.transform.position, -this.transform.forward, out hitInfo ) )
-				{
-					Gizmos.DrawLine( this.transform.position, hitInfo.point );
-					Gizmos.DrawRay( hitInfo.point, 0.05f*(-this.transform.up+this.transform.forward) );
+				distance = hitInfo.distance;
+				Gizmos.DrawLine( this.transform.position, hitInfo.point );
+				Gizmos.DrawRay( hitInfo.point, 0.05f*(-this.transform.up-this.transform.forward) );
 
-					distance += hitInfo.distance;
+				if( mode == MeasureMode.Between )
+				{
+					if( Physics.Raycast( this.transform.position, -this.transform.forward, out hitInfo ) )
+					{
+						Gizmos.DrawLine( this.transform.position, hitInfo.point );
+						Gizmos.DrawRay( hitInfo.point, 0.05f*(-this.transform.up+this.transform.forward) );
+
+						distance += hitInfo.distance;
+
+						distance = Mathf.Round( 1000f*distance );
+
+						EditorText.DrawText( transform.position - 0.01f*transform.up, "" + (distance) + "mm", color );
+					}
+				}
+				else
+				{
+					Gizmos.DrawRay( transform.position, 0.05f*(-this.transform.up+this.transform.forward) );
 
 					distance = Mathf.Round( 1000f*distance );
 
-					EditorText.DrawText( transform.position - 0.01f*transform.up, "" + (distance) + "mm", color );
+					EditorText.DrawText( 0.5f*(transform.position+hitInfo.point) - 0.01f*transform.up, "" + (distance) + "mm", color );
 				}
 			}
-			else
-			{
-				Gizmos.DrawRay( transform.position, 0.05f*(-this.transform.up+this.transform.forward) );
-
-				distance = Mathf.Round( 1000f*distance );
-
-				EditorText.DrawText( 0.5f*(transform.position+hitInfo.point) - 0.01f*transform.up, "" + (distance) + "mm", color );
-			}
 		}
-		
 	}
 }
 
