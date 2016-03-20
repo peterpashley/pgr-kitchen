@@ -23,12 +23,15 @@ public class Measurement : MonoBehaviour
 
 		if( mode == MeasureMode.Fixed )
 		{
-			Vector3 farPoint = this.transform.position + 0.001f*distance * this.transform.forward;
-			Gizmos.DrawLine( this.transform.position, farPoint );
-			Gizmos.DrawRay( farPoint, 0.05f*(-this.transform.up-this.transform.forward) );
-			Gizmos.DrawRay( transform.position, 0.05f*(-this.transform.up+this.transform.forward) );
+			if( distance > 0f )
+			{
+				Vector3 farPoint = this.transform.position + 0.001f*distance * this.transform.forward;
+				Gizmos.DrawLine( this.transform.position, farPoint );
+				Gizmos.DrawRay( farPoint, 0.05f*(-this.transform.up-this.transform.forward) );
+				Gizmos.DrawRay( transform.position, 0.05f*(-this.transform.up+this.transform.forward) );
 
-			EditorText.DrawText( 0.5f*(transform.position+farPoint) - 0.01f*transform.up, "" + (distance) + "mm", color );
+				EditorText.DrawText( 0.5f*(transform.position+farPoint) - 0.01f*transform.up, "" + (distance) + "mm", color );
+			}
 		}
 		else
 		{
